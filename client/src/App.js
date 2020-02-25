@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Component} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Col } from "reactstrap";
 import UserDetails from "./components/UserDetails";
 import MainPage from "./pages/Main"
 import Uploads from "./pages/Uploads"
