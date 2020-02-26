@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col } from "reactstrap";
 import Uploads from "../components/Uploads"
+const fs = require('fs');
+const AWS = require('aws-sdk');
+require('dotenv').config();
 
 const UploadPage = () => {
 
-	const fs = require('fs');
-	const AWS = require('aws-sdk');
-	require('dotenv').config();
 
 	//TODO
 	// process.env is not working
-	const ID = process.env.APIACCESSID;
-	const SECRET = process.env.APISECRETKEY;
-	const BUCKET_NAME = process.env.BUCKETNAME;
+	const ID = "AKIAWTPM6HMO275KQYP7";
+	const SECRET = "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";
+	const BUCKET_NAME = "docusys";
 
 	const s3 = new AWS.S3 ({
 		accessKeyId: ID,
@@ -20,16 +20,24 @@ const UploadPage = () => {
 		Bucket: BUCKET_NAME
 	});
 
+	const [file, setFile] = useState({
+		fileName: ""
+	});
+
+	const { fileName } = file;
+
 
 	const uploadFile = (fileName) => {
-		// Read content from the file
-		const fileContent = fs.readFileSync(fileName);
+		// The fileName comes across with "C:\fakepath\"  We need to strip this out of the file name
+		const file = fileName.split("C:").join(',').split('\\').join(',').split(',').pop();
+		console.log("file to Name is", file);
+		console.log("file to Upload is", fileName);
 
 		// Setting up S3 upload parameters
 		const params = {
-			Bucket: BUCKET_NAME,
-			Key: 'profile.jpg', // Need to get this from input which is the file name to save as
-			Body: fileContent
+			Bucket: "docusys",
+			Key: file,
+			Body: fileName
 		};
 
 		// Uploading files to the bucket
@@ -41,6 +49,17 @@ const UploadPage = () => {
 		});
 	};
 
+	const handleInputChange = e => {
+		const { name, value } = e.target;
+		setFile({ ...fileName, [name]: value
+		})
+	};
+	const handleFormSubmit = e => {
+		console.log("This is the filename", fileName)
+		uploadFile(fileName);
+	}
+
+
 	//TODO Needs to be called on button click "choose file" below
 	// uploadFile("profile_white.jpg");
 
@@ -51,11 +70,20 @@ const UploadPage = () => {
 			<div className="mt-3 form-group">
 				<div className="input-group mb-3">
 					<div className="custom-file">
-						<input type="file" className="custom-file-input" id="inputGroupFile02"></input>
+						<input
+							type="file"
+							name="fileName"
+							className="custom-file-input"
+							id="inputGroupFile02"
+							value={fileName}
+							onChange={handleInputChange}
+						/>
+
+						{/*TODO Need File Name to appear in Browser once Selected*/}
 						<label className="custom-file-label" htmlFor="inputGroupFile02">Choose file</label>
 					</div>
 					<div className="input-group-append">
-						<span className="input-group-text" id="">Upload</span>
+						<button className="input-group-text" id="" onClick={handleFormSubmit}>Upload</button>
 					</div>
 				</div>
 			</div>

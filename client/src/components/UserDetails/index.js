@@ -1,17 +1,18 @@
 import React from 'react';
 import { DetailsWrapper } from "../../styles/";
-import NavBar from "../NavBar";
-
+import { Container, Col, Row } from "reactstrap";
+import {Route} from "react-router-dom";
 const UserDetails = props => {
 
 	return (
 		<>
-			<NavBar />
-			<DetailsWrapper>
-				<h3>{props.firstName} {props.lastName}</h3>
-				<p><strong>Username:</strong> {props.userName}</p>
-				<p><strong>Documents:</strong> {props.documents}</p>
-			</DetailsWrapper>
+			<Col md={6}>
+				<DetailsWrapper>
+					<h3>{props.firstName} {props.lastName}</h3>
+					<p><strong>Username:</strong> {props.userName}</p>
+					<p><strong>Documents:</strong> {props.documents}</p>
+					</DetailsWrapper>
+			</Col>
 		</>
 	)
 }
