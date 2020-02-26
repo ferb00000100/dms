@@ -2,34 +2,29 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container, Col } from "reactstrap";
 import UserDetails from "./components/UserDetails";
-import MainPage from "./pages/Main"
-import Uploads from "./pages/Uploads"
+import MainPage from "./pages/Main";
+import Uploads from "./pages/Uploads";
+import Downloads from "./pages/Downloads";
 import API from "./utils/API";
+import NavBar from "./components/NavBar";
 
 
 const App = () => {
-	//TODO Static statue until DB is working
-
 	const [userInfo, setUserInfo] = useState({
-		firstName: "",
-		lastName: "",
-		userName: "",
-		awsApiKey: "",
-		awsApiSecret: "",
-		documents: []
+		userData: []
 	});
 
-	const { firstName, lastName, userName, awsApiKey, awsApiSecret, documents } = userInfo
+	const { userData } = userInfo
 
 	useEffect(() => {
-		console.log("LOOK HERE--->")
+		// console.log("LOOK HERE--->")
 		//TODO This username needs to be an input field and quried from the DB
 		getUsers("jmartin")
 	}, []);
 
 
 	const getUsers = user => {
-		console.log("User is",user)
+		// console.log("User is",user)
 		if (!user)
 		{
 			return alert("No User Name Selected !");
@@ -37,15 +32,10 @@ const App = () => {
 
 		API.getUsers(user)
 			.then(res => {
-				//TODO How do I do this without the index???
-				console.log(res.data[0].documents);
+				if (!res) return;
+				// console.log(res.data);
 				setUserInfo({
-					firstName: res.data[0].firstName,
-					lastName: res.data[0].lastName,
-					userName: res.data[0].userName,
-					awsApiKey: res.data[0].awsApiKey,
-					awsApiSecret: res.data[0].awsApiSecret,
-					documents: res.data[0].documents,
+					userData: res.data
 				});
 			})
 			.catch(err => console.log("Database Read Error", err))
@@ -62,22 +52,36 @@ const App = () => {
 					</Route>
 					<Route exact path={'/users'}>
 						{/*TODO ReFormat user information*/}
+						{/*	TODO Create Download Links for each Document*/}
 						<Col md={12}>
-								<UserDetails
-									firstName={firstName}
-									lastName={lastName}
-									userName={userName}
-									documents={documents ? "No Documents Found" : documents}
+							<NavBar/>
+							{userData.length ? (
+								<>
+									{userData.map(user => (
+							<UserDetails
+									firstName={user.firstName}
+									lastName={user.lastName}
+									userName={user.userName}
+									documents={user.documents ? "No Documents Found" : user.documents}
 								/>
-								{/*))}*/}
+							))}
+								</>
+								) : (
+								<div className="d-flex loading-spinner">
+									<div className="spinner-border" role="status">
+										<span className="sr-only">Loading...</span>
+									</div>
+								</div>
+							)}
 						</Col>
 					</Route>
 					<Route exact path={'/uploads'}>
 						<Col md={12}>
 							<Uploads />
-								{/*TODO S3 data populates here*/}
-
 						</Col>
+					</Route>
+					<Route exat path={'/downloads'}>
+						<Downloads />
 					</Route>
 
 				</Switch>
