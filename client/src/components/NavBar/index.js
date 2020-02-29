@@ -1,6 +1,7 @@
-import React from 'react';
+import React  from 'react';
 
 const NavBar = props => {
+
 
 	return (
 		<>
@@ -25,11 +26,15 @@ const NavBar = props => {
 							<a className="nav-link" href="/downloads">Download</a>
 						</li>
 					</ul>
+
 					<form className="form-inline my-2 my-lg-0">
-						<input className="form-control mr-sm-2" type="text" placeholder="username"></input>
-						<button className="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
+
+						<a href="/login" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Login</a>
+						<a href="/addUser" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Add User</a>
+
 					</form>
 				</div>
+
 			</nav>
 		</>
 	)

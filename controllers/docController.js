@@ -2,9 +2,9 @@ const AWS = require('aws-sdk');
 require('dotenv').config();
 
 //TODO process.env is not working
-const ID = process.env.APIACCESSID;
-const SECRET = process.env.APISECRETKEY;
-const BUCKET = process.env.BUCKETNAME;
+const ID = "";
+const SECRET = "";
+const BUCKET = "";
 
 const s3 = new AWS ({
 	accessKeyId: ID,

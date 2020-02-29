@@ -5,6 +5,8 @@ import UserDetails from "./components/UserDetails";
 import MainPage from "./pages/Main";
 import Uploads from "./pages/Uploads";
 import Downloads from "./pages/Downloads";
+import Signup from "./pages/Signup"
+import Login from "./pages/LoginPage";
 import API from "./utils/API";
 import NavBar from "./components/NavBar";
 
@@ -54,11 +56,14 @@ const App = () => {
 						{/*TODO ReFormat user information*/}
 						{/*	TODO Create Download Links for each Document*/}
 						<Col md={12}>
+							<h1>DMS Users</h1>
+							<Col sm="12" md={{ size: 10, offset: 2 }}>
 							<NavBar/>
 							{userData.length ? (
 								<>
 									{userData.map(user => (
-							<UserDetails
+
+										<UserDetails
 									firstName={user.firstName}
 									lastName={user.lastName}
 									userName={user.userName}
@@ -73,15 +78,21 @@ const App = () => {
 									</div>
 								</div>
 							)}
-						</Col>
+							</Col></Col>
 					</Route>
 					<Route exact path={'/uploads'}>
 						<Col md={12}>
 							<Uploads />
 						</Col>
 					</Route>
-					<Route exat path={'/downloads'}>
+					<Route exact path={'/downloads'}>
 						<Downloads />
+					</Route>
+					<Route exact path={'/addUser'}>
+						<Signup />
+					</Route>
+					<Route exact path={'/login'}>
+						<Login />
 					</Route>
 
 				</Switch>

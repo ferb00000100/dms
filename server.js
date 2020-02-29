@@ -1,11 +1,11 @@
 const express = require("express");
-require('dotenv').config();
-
+const passport = require('passport');
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+require('dotenv').config();
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -16,6 +16,15 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+// app.use("/", routes);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport config
+// const Account = require('./models/account');
+// passport.use(new LocalStrategy(Account.authenticate()));
+// passport.serializeUser(Account.serializeUser());
+// passport.deserializeUser(Account.deserializeUser());
 
 // Connect to the Mongo DB Local
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dmsdb");
