@@ -1,17 +1,33 @@
 import React, { useState } from "react";
 import { Col } from "reactstrap";
 import Uploads from "../components/Uploads"
-const fs = require('fs');
+import API from "../utils/API";
 const AWS = require('aws-sdk');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 const UploadPage = () => {
 
+	const [file, setFile] = useState({
+		fileName: ""
+	});
+	// const [user, setUserName] = useState({
+	// 	userName: ""
+	// });
 
-	//TODO
-	// process.env is not working
-	const ID = "AKIAWTPM6HMO275KQYP7";
-	const SECRET = "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";
+	const { fileName } = file;
+	// const { userName } = user;
+
+	// const getKeys = (userName) => {
+	// 	API.getUserKey()
+	// 			.then(res => {
+	// 				if (!res) return;
+	// 			})
+	// 			.catch(err => console.log("Database read error", err))
+	// 	}
+
+	const ID = "";
+	const SECRET = "";
 	const BUCKET_NAME = "docusys";
 
 	const s3 = new AWS.S3 ({
@@ -19,12 +35,6 @@ const UploadPage = () => {
 		secretAccessKey: SECRET,
 		Bucket: BUCKET_NAME
 	});
-
-	const [file, setFile] = useState({
-		fileName: ""
-	});
-
-	const { fileName } = file;
 
 
 	const uploadFile = (fileName) => {
@@ -54,20 +64,18 @@ const UploadPage = () => {
 		setFile({ ...fileName, [name]: value
 		})
 	};
+
 	const handleFormSubmit = e => {
 		console.log("This is the filename", fileName)
 		uploadFile(fileName);
 	}
 
-
-	//TODO Needs to be called on button click "choose file" below
-	// uploadFile("profile_white.jpg");
-
 	return (
 		<>
-			<Uploads />
-			<Col sm="12" md={{ size: 8, offset: 2 }}>
-			<div className="mt-3 form-group">
+			<h1>DMS Uploads</h1>
+			<Col sm="12" md={{ size: 10, offset: 2 }}>
+				<Uploads />
+				<div className="mt-3 form-group">
 				<div className="input-group mb-3">
 					<div className="custom-file">
 						<input

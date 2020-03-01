@@ -1,6 +1,6 @@
 import React  from 'react';
 
-const NavBar = props => {
+const NavBarLogin = () => {
 
 
 	return (
@@ -16,20 +16,9 @@ const NavBar = props => {
 						<li className="nav-item active">
 							<a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
 						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="/users">Users</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="/uploads">Uploads</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="/downloads">Download</a>
-						</li>
 					</ul>
-
 					<form className="form-inline my-2 my-lg-0">
-
-						<a href="/" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Login</a>
+						{/*<a href="/" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Login</a>*/}
 						<a href="/addUser" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Add User</a>
 
 					</form>
@@ -40,4 +29,4 @@ const NavBar = props => {
 	)
 }
 
-export default NavBar;
+export default NavBarLogin;

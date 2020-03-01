@@ -1,11 +1,13 @@
 const express = require("express");
-require('dotenv').config();
+// const passport = require('passport');
+// var session = require("express-session");
 
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const passport = require("./config/passport");
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+require('dotenv').config();
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -16,6 +18,12 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+
+// We need to use sessions to keep track of our user's login status
+// app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
 
 // Connect to the Mongo DB Local
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dmsdb");

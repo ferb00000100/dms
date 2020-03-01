@@ -1,20 +1,18 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import UserDetails from "../components/UserDetails";
+import Navbar from "../components/NavBar";
 
 function Users() {
 
 	return (
 		<>
-
-			<Container>
-				<Col md={12}>
-					<Row>
-					<UserDetails/>
-					</Row>
-				</Col>
-			</Container>
-
+			<Navbar />
+			<Col sm="12" md={{ size: 8, offset: 2 }}>
+				<Row>
+				<UserDetails/>
+				</Row>
+			</Col>
 		</>
 	)
 

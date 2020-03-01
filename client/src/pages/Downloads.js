@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Col } from "reactstrap";
 import Downloads from "../components/Downloads"
-// const AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 // const fs = require('fs');
 
 require('dotenv').config();
-
-
 
 const DownloadPage = () => {
 
 	//TODO
 	// process.env is not working
 
-	const ID = "AKIAWTPM6HMO275KQYP7";
-	const SECRET = "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";
+	const ID = "";
+	const SECRET = "";
 	const BUCKET_NAME = "docusys";
 
 	const AWS = require('aws-sdk/global');
@@ -29,7 +27,7 @@ const DownloadPage = () => {
 		fileName: ""
 	})
 
-	const {fileName} = file;
+	// const {fileName} = file;
 
 	useEffect(() => {
 		listFiles();
@@ -62,8 +60,8 @@ const DownloadPage = () => {
 
 	return (
 		<>
-			<h1>Welcome to Downloads</h1>
-			<Col sm="12" md={{ size: 8, offset: 2 }}>
+			<h1>DMS Downloads</h1>
+			<Col sm="12" md={{ size: 10, offset: 2 }}>
 				<>
 				{/*{fileName.length ? (*/}
 

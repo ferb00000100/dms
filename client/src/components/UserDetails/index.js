@@ -1,7 +1,6 @@
 import React from 'react';
 import { DetailsWrapper } from "../../styles/";
-import { Container, Col, Row } from "reactstrap";
-import {Route} from "react-router-dom";
+import { Col } from "reactstrap";
 const UserDetails = props => {
 
 	return (
