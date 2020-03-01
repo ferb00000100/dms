@@ -1,9 +1,10 @@
 import React from "react";
-import Navbar from "../components/NavBar";
+import NavBarSignUp from "../components/NavBarSignUp";
 import {Col} from "reactstrap";
 import useSignUpForm  from "../components/Form";
 import API from "../utils/API";
 
+//TODO RESET FORM ON SUBMIT
 const Signup = () => {
 	const signup = () => {
 
@@ -17,13 +18,15 @@ const Signup = () => {
 			Name: ${inputs.firstName} ${inputs.lastName}
 			Username: ${inputs.userName}`
 			);
-		}
+	}
 
 	const { inputs, handleInputChange, handleSubmit } = useSignUpForm({firstName:"", lastName:"", userName:"", password:"", accessID:"", secretID:"" },signup);
 
 	return (
 		<>
-			<Navbar />
+
+			<h1>DMS Sign Up</h1>
+			<NavBarSignUp />
 			<Col sm="12" md={{ size: 8, offset: 2 }}>
 				<div className="section is-fullheight">
 					<div className="container">

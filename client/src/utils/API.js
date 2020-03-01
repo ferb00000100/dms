@@ -10,8 +10,9 @@ export default {
 		return axios.get("/api/user/" + id);
 	},
 	// Login
-	login: function() {
-		return axios.delete("/api/login/");
+	login: function(inputs) {
+		// console.log(inputs.userName);
+		return axios.post("/api/login/",inputs);
 	},
 	saveUser: function(inputs) {
 		return axios.post("/api/signup",inputs);

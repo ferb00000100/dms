@@ -18,13 +18,13 @@ const UploadPage = () => {
 	const { fileName } = file;
 	// const { userName } = user;
 
-	const getKeys = (userName) => {
-		API.getUserKey()
-				.then(res => {
-					if (!res) return;
-				})
-				.catch(err => console.log("Database read error", err))
-		}
+	// const getKeys = (userName) => {
+	// 	API.getUserKey()
+	// 			.then(res => {
+	// 				if (!res) return;
+	// 			})
+	// 			.catch(err => console.log("Database read error", err))
+	// 	}
 
 	const ID = "";
 	const SECRET = "";

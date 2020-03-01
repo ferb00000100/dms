@@ -6,7 +6,7 @@ import MainPage from "./pages/Main";
 import Uploads from "./pages/Uploads";
 import Downloads from "./pages/Downloads";
 import Signup from "./pages/Signup"
-import Login from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage";
 import API from "./utils/API";
 import NavBar from "./components/NavBar";
 
@@ -48,6 +48,9 @@ const App = () => {
 			<Container>
 				<Switch>
 					<Route exact path={'/'}>
+						<LoginPage />
+					</Route>
+					<Route exact path={'/main'}>
 						<Col md={12}>
 							<MainPage/>
 						</Col>
@@ -91,10 +94,6 @@ const App = () => {
 					<Route exact path={'/addUser'}>
 						<Signup />
 					</Route>
-					<Route exact path={'/login'}>
-						<Login />
-					</Route>
-
 				</Switch>
 			</Container>
 </Router>

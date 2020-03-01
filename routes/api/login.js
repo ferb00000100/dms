@@ -1,30 +1,26 @@
 const router = require("express").Router();
 const User = require("../../models/userModel");
-const passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
-
-router.post('/login',
-	passport.authenticate('local', { successRedirect: '/api/login',
-		failureRedirect: '/login',
-		failureFlash: true })
-);
+var passport = require("../../config/passport");
 
 
-passport.use(new LocalStrategy({
-	usernameField: 'email',
-	passwordField: 'passwd'
-},
-	function(username, password, done) {
-		User.findOne({ username: username }, function(err, user) {
-			if (err) { return done(err); }
-			if (!user) {
-				return done(null, false, { message: 'Incorrect username.' });
-			}
-			if (!user.validPassword(password)) {
-				return done(null, false, { message: 'Incorrect password.' });
-			}
-			return done(null, user);
-		});
-	}
-));
+router.post("/",(req,res) => {
+	console.log(req.body.userName);
+	console.log(req.body.password);
+})
+
+// router.post('/', passport.authenticate('local'),
+// 	function(req, res) {
+		// If this function gets called, authentication was successful.
+		// `req.user` contains the authenticated user.
+		// res.redirect('/users/' + req.user.username);
+	// });
+
+
+// Route for logging user out
+// router.get("/logout", function(req, res) {
+// 	req.logout();
+// 	res.redirect("/");
+// });
+
 
 module.exports = router
