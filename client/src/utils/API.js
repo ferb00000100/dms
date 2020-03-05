@@ -6,15 +6,18 @@ export default {
 		return axios.get("/api/users");
 	},
 	// Get user keys
-	getUserKey: function(id) {
-		return axios.get("/api/user/" + id);
+	getUserKey: function(userName) {
+		return axios.get("/api/getKey/", userName);
 	},
 	// Login
-	login: function(inputs) {
-		// console.log(inputs.userName);
-		return axios.post("/api/login/",inputs);
+	login: function() {
+		return axios.post("/api/login/");
 	},
+	// Add Users
 	saveUser: function(inputs) {
+		const file = inputs.documents.split("C:").join(',').split('\\').join(',').split(',').pop();
+		inputs.documents = file;
+		// console.log(inputs.documents)
 		return axios.post("/api/signup",inputs);
 	}
 };

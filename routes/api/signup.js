@@ -7,9 +7,9 @@ router.post("/", (req, res) => {
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		userName: req.body.userName,
-		password: req.body.password,
 		accessID: req.body.accessID,
 		secretID: req.body.secretID,
+		documents: req.body.documents
 	}).then(dbUsers => {
 			res.json(dbUsers);
 		})

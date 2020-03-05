@@ -13,10 +13,6 @@ const Main = () => {
 				<p className="lead">Upload important documents to Amazon S3.</p>
 				<hr className="my-4"></hr>
 					<p>Store your documents and photos on an encrypted S3 bucket inside AWS</p>
-
-					{/*<p className="lead">*/}
-						{/*<a className="btn btn-primary btn-lg" href="/" role="button">Learn more</a>*/}
-					{/*</p>*/}
 				<Col sm="12" md={{ size: 8, offset: 1 }}>
 					<img src={dmsFlow} alt="dms flow">
 					</img>

@@ -7,7 +7,7 @@ const Downloads = props => {
 
 	return (
 		<>
-			<Navbar />
+			{/*<Navbar />*/}
 			<Col sm="12" md={{ size: 8, offset: 2 }}>
 			<ul>
 				<li></li>
