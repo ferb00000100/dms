@@ -1,86 +1,108 @@
 import React, { useState, useEffect } from "react";
 import { Col } from "reactstrap";
 import Downloads from "../components/Downloads"
-const AWS = require('aws-sdk');
-// const fs = require('fs');
-
-require('dotenv').config();
+import Navbar from "../components/NavBar";
+import API from "../utils/API";
+import { Headers } from "../styles"
 
 const DownloadPage = () => {
 
-	//TODO
-	// process.env is not working
-
-	const ID = "";
-	const SECRET = "";
-	const BUCKET_NAME = "docusys";
-
 	const AWS = require('aws-sdk/global');
 
-	const s3 = new AWS.S3({
-		accessKeyId: ID,
-		secretAccessKey: SECRET,
-		Bucket: BUCKET_NAME
-	});
-
-	const [file, setfile] = useState({
-		fileName: ""
+	const [awsFiles, setAwsFiles] = useState({
+		files: []
 	})
 
-	// const {fileName} = file;
+	const [awsData, setAwsData] = useState({
+		data: []
+	});
+
+	const { files } = awsFiles;
+	const { data } = awsData;
+
+	const ID = data.accessID
+	const SECRET = data.secretID
+	const BUCKET_NAME = "docusys";
+
+	const s3 = new AWS.S3 ({
+		accessKeyId: ID,
+		secretAccessKey: SECRET,
+		Bucket: BUCKET_NAME,
+		S3BL_IGNORE_PATH: true
+	});
+
+	const getKeys = (userName) => {
+		API.getUserKey(userName)
+			.then(res => {
+				if (!res) return;
+				setAwsData({
+					data: res.data[0]
+				});
+			})
+			.catch(err => console.log("Error Getting Keys", err))
+	}
 
 	useEffect(() => {
-		listFiles();
+		getKeys("jmartin")
 	}, []);
 
 	const params = {
 		Bucket: 'docusys',
-		// Delimiter: '',
-		// Prefix: '',
-		MaxKeys: 5
-		// EncodingType: "url",
+		MaxKeys: 5,
+		EncodingType: "url",
 	};
+
+	//TODO Not renedering to the page
 	const listFiles = () => {
 		s3.listObjects(params, (err, data) => {
-		// s3.listObjects(params, (err, data)
-		// 	.then(res => {
-		// 		if (!res) return;
-				setfile({
-					fileName: data.Contents
+			if (err) {
+				return (err);
+			} else {
+				setAwsFiles({
+					files: data.Contents
 				});
-			console.log(data.Contents);
-		})
-		 }
-			// .catch(err => console.log("Error Listing Documents, err"))
+				console.log("this is my data",data.Contents);
+				console.log("This is files", files);
+			}
+		});
+ }
 
-	// move this to a onclick link
-	// listFiles();
-	//TODO Needs to be called on button click "choose file" below
-	// uploadFile("profile_white.jpg");
+	const handleFormSubmit = e => {
+		// e.preventDefault();
+		listFiles();
+	}
 
 	return (
 		<>
-			<h1>DMS Downloads</h1>
-			<Col sm="12" md={{ size: 10, offset: 2 }}>
-				<>
-				{/*{fileName.length ? (*/}
+			<Headers>
+				<h1>DMS Downloads</h1>
+			</Headers>
 
-				{/*	{fileName.map(file => (*/}
+			<Col sm="12" md={{ size: 10, offset: 2 }}>
+				<Navbar/>
+				<div className="input-group-append">
+					<button className="input-group-text" name="files" id="" onClick={handleFormSubmit}>Show Files</button>
+				</div>
+				{files.length ? (
+					<>
+						{files.map(file => (
 						<Downloads
-							filename={file}
+						file={file.key}
 						/>
-					{/*))}*/}
+						))}
 				</>
-				{/*) : (*/}
+				) : (
 				<div className="d-flex loading-spinner">
 					<div className="spinner-border" role="status">
 						<span className="sr-only">Loading...</span>
 					</div>
 				</div>
-				{/*)}*/}
+				)}
 			</Col>
 			</>
 	)
 }
 
 export default DownloadPage;
+
+

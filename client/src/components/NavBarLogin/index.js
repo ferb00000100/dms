@@ -1,7 +1,26 @@
 import React  from 'react';
+import createAuth0Client from '@auth0/auth0-spa-js';
 
 const NavBarLogin = () => {
 
+		//TODO Store Auth Client info in databases
+
+		const login = () => {
+			// console.log("YOU ARE HERE")
+			createAuth0Client({
+				domain: 'dev-r0mu0kil.auth0.com',
+				client_id: 'gJXOA5lqmYUuu1UMgADTaFBhbEXc9UQi'
+			}).then(auth0 => {
+				auth0.loginWithRedirect({
+					redirect_uri: 'http://localhost:3000/main'
+				}).then(token => {
+					//logged in. you can get the user profile like this:
+					auth0.getUser(token).then(user => {
+						console.log(user);
+					});
+				});
+			});
+		}
 
 	return (
 		<>
@@ -10,17 +29,12 @@ const NavBarLogin = () => {
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
-
 				<div className="collapse navbar-collapse" id="navbarColor01">
 					<ul className="navbar-nav mr-auto">
-						<li className="nav-item active">
-							<a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-						</li>
+
 					</ul>
 					<form className="form-inline my-2 my-lg-0">
-						{/*<a href="/" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Login</a>*/}
-						<a href="/addUser" className="ml-2 btn btn-success my-2 my-sm-0" type="submit">Add User</a>
-
+						<button className=" ml-2 btn-success text-light input-group-text" id="" onClick={login}>Login</button>
 					</form>
 				</div>
 

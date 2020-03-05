@@ -1,43 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col } from "reactstrap";
 import Uploads from "../components/Uploads"
 import API from "../utils/API";
 const AWS = require('aws-sdk');
-const dotenv = require('dotenv');
-dotenv.config();
 
-const UploadPage = () => {
+
+export const UploadPage = () => {
 
 	const [file, setFile] = useState({
 		fileName: ""
 	});
-	// const [user, setUserName] = useState({
-	// 	userName: ""
-	// });
+	const [awsData, setAwsData] = useState({
+		data: []
+	});
 
 	const { fileName } = file;
-	// const { userName } = user;
+	const { data } = awsData;
 
-	// const getKeys = (userName) => {
-	// 	API.getUserKey()
-	// 			.then(res => {
-	// 				if (!res) return;
-	// 			})
-	// 			.catch(err => console.log("Database read error", err))
-	// 	}
-
-	const ID = "";
-	const SECRET = "";
+	const ID=data.accessID
+	const SECRET=data.secretID
 	const BUCKET_NAME = "docusys";
 
-	const s3 = new AWS.S3 ({
+		const s3 = new AWS.S3 ({
 		accessKeyId: ID,
 		secretAccessKey: SECRET,
 		Bucket: BUCKET_NAME
 	});
 
+	 const getKeys = (userName) => {
+		API.getUserKey(userName)
+				.then(res => {
+					if (!res) return;
+					setAwsData({
+						data: res.data[0]
+					});
+				})
+				.catch(err => console.log("Error Getting Keys", err))
+		}
 
-	const uploadFile = (fileName) => {
+	useEffect(() => {
+		getKeys("jmartin")
+	}, []);
+
+
+	 const uploadFile = (fileName) => {
 		// The fileName comes across with "C:\fakepath\"  We need to strip this out of the file name
 		const file = fileName.split("C:").join(',').split('\\').join(',').split(',').pop();
 		console.log("file to Name is", file);
@@ -72,9 +78,8 @@ const UploadPage = () => {
 
 	return (
 		<>
-			<h1>DMS Uploads</h1>
-			<Col sm="12" md={{ size: 10, offset: 2 }}>
-				<Uploads />
+			<Uploads />
+			<Col sm="12" md={{ size: 8, offset: 2 }}>
 				<div className="mt-3 form-group">
 				<div className="input-group mb-3">
 					<div className="custom-file">
