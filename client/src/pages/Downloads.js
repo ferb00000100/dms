@@ -3,10 +3,12 @@ import { Col } from "reactstrap";
 import Downloads from "../components/Downloads"
 import Navbar from "../components/NavBar";
 import API from "../utils/API";
-import { Headers } from "../styles"
+import {Anchor, Headers} from "../styles"
+import UserDetails from "../components/UserDetails";
+const fs = require('fs');
+
 
 const DownloadPage = () => {
-
 	const AWS = require('aws-sdk/global');
 
 	const [awsFiles, setAwsFiles] = useState({
@@ -52,7 +54,6 @@ const DownloadPage = () => {
 		EncodingType: "url",
 	};
 
-	//TODO Not renedering to the page
 	const listFiles = () => {
 		s3.listObjects(params, (err, data) => {
 			if (err) {
@@ -62,14 +63,34 @@ const DownloadPage = () => {
 					files: data.Contents
 				});
 				console.log("this is my data",data.Contents);
-				console.log("This is files", files);
+				// console.log("This is files", files);
 			}
 		});
- }
+	}
 
-	const handleFormSubmit = e => {
-		// e.preventDefault();
-		listFiles();
+	const download = (req, res, next) => {
+		console.log("Hitting S3");
+		// download the file via aws s3 here
+		const fileKey = req.query['profile.jpg'];
+
+		console.log('Trying to download file', fileKey);
+		const AWS = require('aws-sdk');
+		AWS.config.update(
+			{
+				accessKeyId: ID,
+				secretAccessKey: SECRET,
+				region: 'us-east-1'
+			}
+		);
+		const s3 = new AWS.S3();
+		const options = {
+			Bucket: BUCKET_NAME,
+			Key: fileKey,
+		};
+
+		res.attachment(fileKey);
+		const fileStream = s3.getObject(options).createReadStream();
+		fileStream.pipe(res);
 	}
 
 	return (
@@ -81,28 +102,30 @@ const DownloadPage = () => {
 			<Col sm="12" md={{ size: 10, offset: 2 }}>
 				<Navbar/>
 				<div className="input-group-append">
-					<button className="input-group-text" name="files" id="" onClick={handleFormSubmit}>Show Files</button>
+					<button className="input-group-text" name="files" id="" onClick={listFiles}>Show Files</button>
 				</div>
-				{files.length ? (
-					<>
-						{files.map(file => (
-						<Downloads
-						file={file.key}
-						/>
-						))}
+
+						{files.length  ? (
+							<>
+								{files.map(file => (
+								<Downloads
+								Name={file.Key}
+
+								/>
+								))}
 				</>
-				) : (
-				<div className="d-flex loading-spinner">
-					<div className="spinner-border" role="status">
-						<span className="sr-only">Loading...</span>
-					</div>
-				</div>
-				)}
+							):(
+
+							<div className="d-flex loading-spinner">
+								<div className="spinner-border" role="status">
+									<span className="sr-only">Loading...</span>
+								</div>
+							</div>
+							)}
 			</Col>
 			</>
 	)
 }
 
 export default DownloadPage;
-
 

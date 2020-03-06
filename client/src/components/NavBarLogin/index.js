@@ -12,8 +12,8 @@ const NavBarLogin = () => {
 				client_id: 'gJXOA5lqmYUuu1UMgADTaFBhbEXc9UQi'
 			}).then(auth0 => {
 				auth0.loginWithRedirect({
-					redirect_uri: 'https://gentle-peak-35355.herokuapp.com/main'
-					// redirect_uri: 'http://localhost:3000/main'
+					// redirect_uri: 'https://gentle-peak-35355.herokuapp.com/main'
+					redirect_uri: 'http://localhost:3000/main'
 				}).then(token => {
 					//logged in. you can get the user profile like this:
 					auth0.getUser(token).then(user => {
