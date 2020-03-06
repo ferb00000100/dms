@@ -6,6 +6,15 @@ const teal = "#008080";
 const tealborder = `2px solid ${teal}`;
 // const border = `2px solid ${grey}`;
 
+export const Anchor = styled.a`
+	display: inline-block;
+	img {
+		display: block
+		width: 40px;
+		height: 40px;
+	}
+`
+
 export const Headers = styled.section`
 	 h1 {
 	 color: ${teal};
@@ -14,38 +23,6 @@ export const Headers = styled.section`
         font-size: 45px;
         font-weight: 500;
     }
-`
-
-export const CardWrapper = styled.article`
-	:hover {
-		cursor: pointer;
-		.card {
-			border-color: ${teal};
-			}
-	}
-	
-	text-align: center;
-	img {
-		width: 80px;
-	}
-	
-	.card-header {
-		background-color: ${props => props.isSelected ? teal : null}
-		
-	}
-	
-	.card {
-	
-		background-color: white;
-	}
-	
-	.card-body {
-		padding: 2rm;
-		}
-	
-	.card-header {
-	
-	}
 `
 
 export const DetailsWrapper = styled(Card)`
@@ -60,20 +37,3 @@ export const DetailsWrapper = styled(Card)`
 	
 		}
 `
-
-export const FormWrapper = styled(Form)`
-	
-	input.form-control {
-		width: 350px
-	}
-	
-	button {
-		background: ${teal}
-		}
-`
-export const JumboWrapper = styled (Jumbotron)`
-
-	background-color: ${green}
-
-`
-

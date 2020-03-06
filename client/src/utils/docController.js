@@ -1,10 +1,26 @@
 const AWS = require('aws-sdk');
-require('dotenv').config();
 
-//TODO process.env is not working
-const ID = "";
-const SECRET = "";
-const BUCKET = "";
+import API from "./API";
+import {useEffect} from "react";
+
+const getKeys = (userName) => {
+	API.getUserKey(userName)
+		.then(res => {
+			if (!res) return;
+			setAwsData({
+				data: res.data[0]
+			});
+		})
+		.catch(err => console.log("Error Getting Keys", err))
+}
+
+useEffect(() => {
+	getKeys("jmartin")
+}, []);
+
+
+const ID = data.accessID
+const SECRET = data.secretID
 
 const s3 = new AWS ({
 	accessKeyId: ID,
