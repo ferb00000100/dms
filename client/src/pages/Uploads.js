@@ -38,6 +38,7 @@ export const UploadPage = () => {
 				.catch(err => console.log("Error Getting Keys", err))
 		}
 
+	//	TODO if no user is any the database the page should still load. It will error if no keys are found
 	useEffect(() => {
 		getKeys("jmartin")
 	}, []);
