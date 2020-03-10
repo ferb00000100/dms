@@ -20,9 +20,8 @@ const App = () => {
 	const { userData } = userInfo
 
 	useEffect(() => {
-		// console.log("LOOK HERE--->")
 		//TODO This username needs to be an input field and quried from the DB
-		getUsers("jmartin")
+		// getUsers("jmartin")
 	}, []);
 
 
