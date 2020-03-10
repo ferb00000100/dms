@@ -6,7 +6,6 @@ const NavBarLogin = () => {
 		//TODO Store Auth Client info in databases
 
 		const login = () => {
-			// console.log("YOU ARE HERE")
 			createAuth0Client({
 				domain: 'dev-r0mu0kil.auth0.com',
 				client_id: 'gJXOA5lqmYUuu1UMgADTaFBhbEXc9UQi'
