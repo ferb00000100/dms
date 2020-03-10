@@ -68,30 +68,6 @@ const DownloadPage = () => {
 		});
 	}
 
-	const download = (req, res, next) => {
-		console.log("Hitting S3");
-		// download the file via aws s3 here
-		const fileKey = req.query['profile.jpg'];
-
-		console.log('Trying to download file', fileKey);
-		const AWS = require('aws-sdk');
-		AWS.config.update(
-			{
-				accessKeyId: ID,
-				secretAccessKey: SECRET,
-				region: 'us-east-1'
-			}
-		);
-		const s3 = new AWS.S3();
-		const options = {
-			Bucket: BUCKET_NAME,
-			Key: fileKey,
-		};
-
-		res.attachment(fileKey);
-		const fileStream = s3.getObject(options).createReadStream();
-		fileStream.pipe(res);
-	}
 
 	return (
 		<>
