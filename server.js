@@ -23,7 +23,8 @@ app.get('*', (request, response) => {
 app.use(routes);
 
 // Connect to the Mongo DB Local
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dmsdb");
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dmsdb");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://dmsuser:DmsUs3r!@ds253368.mlab.com:53368/heroku_nnfbljst" );
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'));
 
