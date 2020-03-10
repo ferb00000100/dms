@@ -8,6 +8,7 @@ import { Headers } from "../styles"
 // import UploadPage from "../pages/Uploads"
 
 
+
 //TODO RESET FORM ON SUBMIT
 const Signup = () => {
 	const signup = () => {
