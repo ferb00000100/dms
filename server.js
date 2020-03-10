@@ -18,10 +18,6 @@ if (process.env.NODE_ENV === "production") {
 	app.use(express.static("client/build"));
 }
 
-// app.get('*', (request, response) => {
-// 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// });
-
 app.get("*", function(req, res) {
 	res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
@@ -31,10 +27,6 @@ app.get("*", function(req, res) {
 mongoose.connect(process.env.MONGODB_URI || "mongodb://dmsuser:DmsUs3r!@ds253368.mlab.com:53368/heroku_nnfbljst" );
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'));
-
-//Connect to Mongo DB Heroku
-// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-// mongoose.connect(MONGODB_URI);
 
 // Start the API server
 app.listen(PORT, function() {
