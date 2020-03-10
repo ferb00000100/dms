@@ -9,9 +9,16 @@ export default {
 	getUserKey: function(userName) {
 		return axios.get("/api/getKey/", userName);
 	},
-	// Login
-	login: function() {
-		return axios.post("/api/login/");
+	// Download
+	download: function(fileKey, awsId, secret, bucket) {
+		const data = [{key:fileKey, ID:awsId, SECRET:secret, BUCKET:bucket}]
+		// console.log("my data", data);
+		return axios.post("/api/download/",data);
+	},
+	// Upload
+	upload: function(fileName, awsId, secret, bucket) {
+		const data = [{filename: fileName, ID: awsId, SECRET: secret, BUCKET: bucket}]
+		return axios.post("/api/upload/", data);
 	},
 	// Add Users
 	saveUser: function(inputs) {
