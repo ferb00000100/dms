@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container, Col } from "reactstrap";
 import UserDetails from "./components/UserDetails";
 import MainPage from "./pages/Main";
-import Uploads from "./pages/Uploads";
+import Upload from "./pages/Uploads";
 import Downloads from "./pages/Downloads";
 // import Users from "./pages/Users";
 import Signup from "./pages/Signup"
@@ -86,7 +86,7 @@ const App = () => {
 					</Route>
 					<Route exact path={'/uploads'}>
 						<Col md={12}>
-							<Uploads />
+							<Upload />
 						</Col>
 					</Route>
 					<Route exact path={'/downloads'}>

@@ -1,20 +1,63 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import{ Col } from "reactstrap";
 import { Anchor } from "../../styles";
 import s3Image from "./S3_icon.png";
+import API from "../../utils/API";
+const AWS = require('aws-sdk');
 
 const Downloads = props => {
 
+	const [awsData, setAwsData] = useState({
+		data: []
+	});
+
+	const { data } = awsData;
+
+	const ID = data.accessID
+	const SECRET = data.secretID
+	const BUCKET_NAME = "docusys";
+
+	// const s3 = new AWS.S3 ({
+	// 	accessKeyId: ID,
+	// 	secretAccessKey: SECRET,
+	// 	Bucket: BUCKET_NAME,
+	// 	S3BL_IGNORE_PATH: true
+	// });
+
+	const getKeys = (userName) => {
+		API.getUserKey(userName)
+			.then(res => {
+				if (!res) return;
+				setAwsData({
+					data: res.data[0]
+				});
+			})
+			.catch(err => console.log("Error Getting Keys", err))
+	}
+
+	useEffect(() => {
+		getKeys("jmartin")
+	}, []);
+
+
+	const getFile = (prop,awsId,secret,bucket) => {
+		const fileKey = prop.Name
+		API.download(fileKey,awsId,secret,bucket)
+			.then(res => {
+				if (!res) return;
+
+			})
+			.catch (err => console.log("Error Getting Keys", err))
+	}
 
 	return (
 		<>
 			<Col sm="12" md={{ size: 8, offset: 2 }}>
 			<ul>
 				<Anchor>
-				<li className="p-2">{props.Name}
+					<li type="button" onClick={() => getFile(props, ID, SECRET, BUCKET_NAME)}>{props.Name}
 				</li>
-					<a><img src={s3Image} /></a>
-					{/*<a href="https://docusys.s3.amazonaws.com/"{...props.Name}><img src={s3Image} /></a>*/}
+					<a><img src={s3Image}/></a>
 				</Anchor>
 			</ul>
 			</Col>
