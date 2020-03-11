@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const User = require("../../models/userModel");
 
-
 router.post("/", (req, res) => {
 	User.create({
 		firstName: req.body.firstName,

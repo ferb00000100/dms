@@ -10,6 +10,7 @@ const UploadBar = () => {
 
 	const { fileName } = file;
 
+	//TODO Finish the API and route functions and tie this into the other uploade functionality
 	const uploadFileMongo = (fileName) => {
 		// The fileName comes across with "C:\fakepath\"  We need to strip this out of the file name
 		const file = fileName.split("C:").join(',').split('\\').join(',').split(',').pop();
@@ -18,8 +19,6 @@ const UploadBar = () => {
 				if (!res) return;
 			})
 			.catch(err => console.log("Error writing Document to Database", err))
-		// console.log("file to Name is", file);
-		// console.log("file to Upload is", fileName);
 	}
 
 	const handleInputChange = e => {
@@ -29,7 +28,7 @@ const UploadBar = () => {
 	};
 
 	const handleFormSubmit = e => {
-		console.log("This is the filename", fileName)
+		// console.log("This is the filename", fileName)
 		uploadFileMongo(fileName);
 	}
 

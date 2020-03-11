@@ -3,7 +3,6 @@ import{ Col } from "reactstrap";
 import { Anchor } from "../../styles";
 import s3Image from "./S3_icon.png";
 import API from "../../utils/API";
-const AWS = require('aws-sdk');
 
 const Downloads = props => {
 
@@ -16,13 +15,6 @@ const Downloads = props => {
 	const ID = data.accessID
 	const SECRET = data.secretID
 	const BUCKET_NAME = "docusys";
-
-	// const s3 = new AWS.S3 ({
-	// 	accessKeyId: ID,
-	// 	secretAccessKey: SECRET,
-	// 	Bucket: BUCKET_NAME,
-	// 	S3BL_IGNORE_PATH: true
-	// });
 
 	const getKeys = (userName) => {
 		API.getUserKey(userName)
@@ -38,7 +30,6 @@ const Downloads = props => {
 	useEffect(() => {
 		getKeys("jmartin")
 	}, []);
-
 
 	const getFile = (prop,awsId,secret,bucket) => {
 		const fileKey = prop.Name

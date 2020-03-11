@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container, Col } from "reactstrap";
 import UserDetails from "./components/UserDetails";
 import MainPage from "./pages/Main";
-import Upload from "./pages/Uploads";
+// import Upload from "./pages/Uploads";  // replaced with Push
 import Downloads from "./pages/Downloads";
-// import Users from "./pages/Users";
+import Push from "./pages/Push";
 import Signup from "./pages/Signup"
 import LoginPage from "./pages/LoginPage";
 import API from "./utils/API";
 import NavBar from "./components/NavBar";
+import { Headers } from "../src/styles/"
 
 
 const App = () => {
@@ -59,7 +60,9 @@ const App = () => {
 						{/*TODO ReFormat user information*/}
 						{/*	TODO Create Download Links for each Document*/}
 						<Col md={12}>
+							<Headers>
 							<h1>DMS Users</h1>
+							</Headers>
 							<Col sm="12" md={{ size: 10, offset: 2 }}>
 								<NavBar/>
 								{userData.length ? (
@@ -85,7 +88,8 @@ const App = () => {
 					</Route>
 					<Route exact path={'/uploads'}>
 						<Col md={12}>
-							<Upload />
+							{/*<Upload />*/}
+						<Push/>
 						</Col>
 					</Route>
 					<Route exact path={'/downloads'}>
