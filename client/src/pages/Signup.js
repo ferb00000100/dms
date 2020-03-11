@@ -1,12 +1,9 @@
 import React from "react";
 import NavBarSignUp from "../components/NavBarSignUp";
 import {Col, Row} from "reactstrap";
-// import UploadBar from "../components/UploadBar"
 import useSignUpForm  from "../components/Form";
 import API from "../utils/API";
 import { Headers } from "../styles"
-// import UploadPage from "../pages/Uploads"
-
 
 
 //TODO RESET FORM ON SUBMIT

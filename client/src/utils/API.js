@@ -16,16 +16,17 @@ export default {
 		return axios.post("/api/download/",data);
 	},
 	// Upload
-	upload: function(fileName, awsId, secret, bucket) {
-		const data = [{filename: fileName, ID: awsId, SECRET: secret, BUCKET: bucket}]
-		return axios.post("/api/upload/", data);
+	upload: function(file, data) {
+		const dataCombine = [{filename: file.name, id: data[0].ID, secret: data[0].SECRET, bucket: data[0].BUCKET_NAME }]
+		return axios.post("/api/upload/", dataCombine);
 	},
 	// Add Users
 	saveUser: function(inputs) {
 		const file = inputs.documents.split("C:").join(',').split('\\').join(',').split(',').pop();
 		inputs.documents = file;
-		// console.log(inputs.documents)
 		return axios.post("/api/signup",inputs);
 	}
 };
+
+
 

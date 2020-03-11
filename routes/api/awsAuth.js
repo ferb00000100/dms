@@ -2,10 +2,8 @@ const router = require("express").Router();
 const User = require("../../models/userModel");
 
 router.get("/", (req, res) => {
-	// console.log(req);
 	User.find({"userName":"jmartin"},{accessID:1, secretID:1})
 		.then(dbUsers => {
-			// console.log("This is dbusers ",dbUsers)
 			res.json(dbUsers);
 		})
 		.catch(err => {
