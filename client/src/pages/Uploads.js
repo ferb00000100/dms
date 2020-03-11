@@ -37,14 +37,18 @@ export const Upload = () => {
 	}, []);
 
 	const handleInputChange = e => {
+		e.preventDefault();
+		console.log("VALUE-->",e.target.value);
 		const { name, value } = e.target;
 		setFile({ ...fileName, [name]: value
 		})
 	};
 
 	const handleFormSubmit = (awsId, secret, bucket) => {
+		console.log("CLICKED-->");
+
 		const file = fileName.split("C:").join(',').split('\\').join(',').split(',').pop();
-		console.log("This is the filename", file)
+		// console.log("This is the filename", file)
 		API.upload(file, awsId, secret, bucket)
 
 	}
@@ -64,11 +68,10 @@ export const Upload = () => {
 								value={fileName}
 								onChange={handleInputChange}
 							/>
-
 							{/*TODO Need File Name to appear in Browser once Selected*/}
 							<label className="custom-file-label" htmlFor="inputGroupFile02">Choose file</label>
 						</div>
-						<div className="input-group-append">
+						<div>
 							<button className="input-group-text" id="" onClick={handleFormSubmit(ID, SECRET, BUCKET_NAME)}>Upload</button>
 						</div>
 					</div>

@@ -3,13 +3,11 @@ import { Col } from "reactstrap";
 import Downloads from "../components/Downloads"
 import Navbar from "../components/NavBar";
 import API from "../utils/API";
-import {Anchor, Headers} from "../styles"
-import UserDetails from "../components/UserDetails";
-const fs = require('fs');
+import {Headers} from "../styles"
+const AWS = require('aws-sdk');
 
 
 const DownloadPage = () => {
-	const AWS = require('aws-sdk/global');
 
 	const [awsFiles, setAwsFiles] = useState({
 		files: []
@@ -62,8 +60,7 @@ const DownloadPage = () => {
 				setAwsFiles({
 					files: data.Contents
 				});
-				console.log("this is my data",data.Contents);
-				// console.log("This is files", files);
+				// console.log("this is my data",data.Contents);
 			}
 		});
 	}
