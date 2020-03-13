@@ -10,11 +10,10 @@ export default {
 		return axios.get("/api/getKey/", userName);
 	},
 	// Download
-	download: function(fileKey) {
-		// download: function(fileKey, awsId, secret, bucket) {
-		// const data = [{key:fileKey, ID:awsId, SECRET:secret, BUCKET:bucket}]
+	download: function(fileKey, awsId, secret, bucket) {
+		const data = [{key:fileKey, ID:awsId, SECRET:secret, BUCKET:bucket}]
 		// console.log("my data", data);
-		return axios.post("/api/download/",fileKey);
+		return axios.post("/api/download/",data);
 	},
 	// Upload
 	upload: function(file, data) {

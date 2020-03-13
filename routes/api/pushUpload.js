@@ -25,7 +25,7 @@ const upload = multer({
 });
 
 router.post("/", upload.single('myUpload'), function (req, res, next) {
-	res.send("Upload Successful");
+	// res.send("Upload Successful");
 	res.redirect('/uploads');
 
 });
