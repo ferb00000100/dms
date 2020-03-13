@@ -6,9 +6,9 @@ const path = require('path');
 router.post("/", (req, res) => {
 
 	const fileKey = req.body[0].key;
-	const BUCKET = req.body[0].BUCKET;
-	const ID = req.body[0].ID;
-	const SECRET = req.body[0].SECRET;
+	// const BUCKET = req.body[0].BUCKET;
+	// const ID = req.body[0].ID;
+	// const SECRET = req.body[0].SECRET;
 	// const filePath = fileKey;
 
 	const s3 = new AWS.S3 ({
@@ -18,14 +18,14 @@ router.post("/", (req, res) => {
 		S3BL_IGNORE_PATH: true
 	});
 
-	var params = {
-		Bucket: BUCKET,
+	const params = {
+		Bucket: "docusys",
 		Key: fileKey,
 	};
 		AWS.config.update(
 			{
-				accessKeyId: ID,
-				secretAccessKey: SECRET,
+				accessKeyId: process.env.ACCESSKEY,
+				secretAccessKey: process.env.SECRET,
 				region: 'us-east-1'
 			}
 		);
