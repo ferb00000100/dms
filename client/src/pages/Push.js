@@ -49,11 +49,13 @@ export default class UploadForm extends React.Component {
 				<Col sm="12" md={{size: 8, offset: 2}}>
 					<div className="section is-fullheight">
 						<Col md={{size: 12, offset: 0}} className="container">
-							<form onSubmit={this.handleSubmit}>
+							{/*<form onSubmit={this.handleSubmit}>*/}
+							<form action="/api/upload" method="POST" enctype="multipart/form-data">
 								<fieldset>
 									<div className="form-group">
 										<label htmlFor="exampleInputFile">Upload File</label>
 										<input type="file" name="myUpload" className="form-control-file" id="exampleInputFile" onChange={this.handleChange} aria-describedby="fileHelp"></input>
+										{/*<input type="file" name="myUpload" className="form-control-file" id="exampleInputFile" onChange={this.handleChange} aria-describedby="fileHelp"></input>*/}
 									</div>
 
 									<button type="submit" className="btn btn-success">Submit</button>
