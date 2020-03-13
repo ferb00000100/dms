@@ -4,7 +4,8 @@ const signupRoutes = require("./signup");
 const loginRoutes = require("./login");
 const awsAuthRoutes = require("./awsAuth");
 const awsDownload = require("./download");
-const awsUpload = require("./upload");
+// const awsUpload = require("./upload");
+const awsUpload = require("./pushUpload");
 
 // User routes
 
