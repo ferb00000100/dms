@@ -12,9 +12,9 @@ router.post("/", (req, res) => {
 	// const filePath = fileKey;
 
 	const s3 = new AWS.S3 ({
-		accessKeyId: ID,
-		secretAccessKey: SECRET,
-		Bucket: BUCKET,
+		accessKeyId: process.env.ACCESSKEY,
+		secretAccessKey: process.env.SECRET,
+		Bucket: "docusys",
 		S3BL_IGNORE_PATH: true
 	});
 

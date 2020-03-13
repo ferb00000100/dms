@@ -18,13 +18,14 @@ const upload = multer({
 			cb(null, {fieldName: file.fieldname});
 		},
 		key: function (req, file, cb) {
-			console.log("THIS IS THE FILE",file);
+			// console.log("THIS IS THE FILE",file);
 			cb(null,  file.originalname); //use Date.now() for unique file keys
 		}
 	})
 });
 
 router.post("/", upload.single('myUpload'), function (req, res, next) {
+	res.send("Upload Successful");
 	res.redirect('/uploads');
 
 });

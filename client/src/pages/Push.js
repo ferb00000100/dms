@@ -32,7 +32,7 @@ export default class UploadForm extends React.Component {
 				this.setState({awsData: res.data[0]})
 				let data = [{ID: res.data[0].accessID, SECRET:res.data[0].secretID, BUCKET_NAME: "docusys"}];
 				// API.upload(this.state.value, data);
-				console.log("formdata", formData);
+				// console.log("formdata", formData);
 				API.upload(this.state.file, data);
 			})
 			.catch(err => console.log("Error Getting Keys", err))
