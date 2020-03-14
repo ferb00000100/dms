@@ -29,7 +29,8 @@ router.post("/", (req, res) => {
 				region: 'us-east-1'
 			}
 		);
-	const destPath = `/tmp/${path.basename(fileKey)}` // Downloads to /tmp
+	// const destPath = `/tmp/${path.basename(fileKey)}` // Downloads to /tmp
+	const destPath = `/Users/jmartin/Downloads/${path.basename(fileKey)}` // Downloads to /tmp
 	s3.getObject(params)
 	.createReadStream()
 	.pipe(fs.createWriteStream(destPath))
