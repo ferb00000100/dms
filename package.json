@@ -34,7 +34,7 @@
     "@auth0/auth0-spa-js": "^1.6.4",
     "auth0-js": "^9.12.2",
     "aws-sdk": "^2.624.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "blubird": "0.0.1-security",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
